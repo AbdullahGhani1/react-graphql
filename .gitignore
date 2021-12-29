@@ -11,6 +11,8 @@
 # production
 /build
 
+# enviromentVeriable
+.env
 # misc
 .DS_Store
 .env.local
