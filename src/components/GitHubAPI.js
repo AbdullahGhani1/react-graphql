@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios"; // for API Calling
 
+// fetch
+//  ajaxCall
 const api = axios.create({
   baseURL: "https://api.github.com",
 });
@@ -24,8 +26,8 @@ function GitHubAPI() {
   }, []);
   return (
     <div>
-      <h1>User Data</h1>
-      <pre>{userData && JSON.stringify(userData, null, 4)}</pre>
+      <h3>User Data</h3>
+      <pre>{userData && JSON.stringify(userData, null, 2)}</pre>
       <h3>User Repo Data</h3>
       <pre>{userRepos && JSON.stringify(userRepos, null, 4)}</pre>
     </div>
