@@ -12,9 +12,38 @@ const api = axios.create({
 
 function GithubGraphQL() {
   // First Method
+  //   const feetchData_js = async (organizationName) => {
+  //     const QUERY_ORGANIZATION = `query{
+  //         organization(login:"${organizationName}"){
+  //             name
+  //             description
+  //             url
+  //             createdAt
+  //         }
+  //         viewer{
+  //             login
+  //             email
+  //             company
+  //             repositories(first:5){
+  //                 edges{
+  //                     node{
+  //                         name
+  //                     }
+  //                 }
+  //             }
+
+  //         }
+  //       }`;
+  //     const res = await api.post("/graphql", {
+  //       query: QUERY_ORGANIZATION
+  //     });
+  //     console.log("GraphQL Response: ", res);
+  //   };
+  //   =================================================================================================
+
   const feetchData_js = async (organizationName) => {
-    const QUERY_ORGANIZATION = `query{
-          organization(login:"${organizationName}"){
+    const QUERY_ORGANIZATION = `query queryOrganization($organizationName: String!){
+          organization(login:"$organizationName"){
               name
               description
               url
@@ -31,43 +60,14 @@ function GithubGraphQL() {
                       }
                   }
               }
-
           }
         }`;
     const res = await api.post("/graphql", {
       query: QUERY_ORGANIZATION,
+      variables: { organizationName },
     });
     console.log("GraphQL Response: ", res);
   };
-  //   =================================================================================================
-
-  //   const feetchData_js = async (organizationName) => {
-  //     const QUERY_ORGANIZATION = `query queryOrganization($organizationName: String!){
-  //           organization(login:"$organizationName"){
-  //               name
-  //               description
-  //               url
-  //               createdAt
-  //           }
-  //           viewer{
-  //               login
-  //               email
-  //               company
-  //               repositories(first:5){
-  //                   edges{
-  //                       node{
-  //                           name
-  //                       }
-  //                   }
-  //               }
-  //           }
-  //         }`;
-  //     const res = await api.post("/graphql", {
-  //       query: QUERY_ORGANIZATION,
-  //       variables: { organizationName },
-  //     });
-  //     console.log("GraphQL Response: ", res);
-  //   };
 
   useEffect(() => {
     feetchData_js("google");
